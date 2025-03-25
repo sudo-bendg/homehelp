@@ -3,10 +3,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
-    background-color: #f5f5f5;
+    height: 100vh;
 }
 
 /* Toolbar Styles */
@@ -14,10 +14,17 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem;
     background-color: #4285f4;
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .toolbar h1 {
@@ -25,151 +32,127 @@ body {
     font-size: 1.5rem;
 }
 
-.toolbar-buttons * {
+.toolbar-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.toolbar-buttons a {
     color: white;
     text-decoration: none;
-    background-color: #d9534f;
+    background-color: #357ae8;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     font-size: 1rem;
+    white-space: nowrap;
 }
 
-.logout-button:hover {
-    background-color: #c9302c;
+.toolbar-buttons a:hover {
+    background-color: #2a65c7;
 }
 
-/* Container Styles */
-.container {
-    flex: 1;
+/* Centered Section (Login/Upload) */
+.centered-section {
+    margin: 5rem auto 2rem;
     padding: 2rem;
-    overflow-y: auto;
-}
-
-.container h2 {
-    margin-top: 0;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
-/* Sign In Page Specific Styles */
-h1 {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
 }
 
-.input-group {
+.centered-section h1 {
     margin-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
-input {
-    width: 100%;
+.centered-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.centered-section input,
+.centered-section button {
     padding: 0.8rem;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
 }
 
-button {
-    width: 100%;
-    padding: 0.8rem;
-    background-color: #4CAF50;
+.centered-section button {
+    background-color: #4285f4;
     color: white;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    font-size: 1rem;
 }
 
-button:hover {
-    background-color: #45a049;
+.centered-section button:hover {
+    background-color: #357ae8;
 }
 
-p {
-    text-align: center;
-    margin-top: 1rem;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* File List Styles */
-.file-list {
+/* File/Directory Listing */
+.file-container {
+    margin-top: 8rem;
+    padding: 2rem;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    gap: 1rem; /* Add spacing between rows */
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
 }
 
 .file-item {
-    width: 100%; /* Make each item take up the full width */
-    padding: 0.8rem;
-    background-color: #ffffff;
+    background-color: white;
     border: 1px solid #ddd;
     border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 1rem;
+    width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0.5rem;
+}
+
+.file-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    word-wrap: break-word;
 }
 
 .file-item a {
-    color: #007bff;
+    margin-top: 0.5rem;
+    color: #4285f4;
     text-decoration: none;
+    font-size: 0.9rem;
 }
 
 .file-item a:hover {
     text-decoration: underline;
 }
 
-/* Links */
-a {
-    color: #007bff;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    margin-top: 1rem;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Upload Link */
-.upload-link {
-    display: block;
-    text-align: center;
-    margin-top: 1rem;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.upload-link:hover {
-    text-decoration: underline;
-}
-
-/* Full Page Layout */
-html, body {
-    height: 100%;
-}
-
-.toolbar-buttons{
-    display: flex;
-    flex-direction: row;
-}
-
-@media (min-width: 768px) {
-    .container {
-        width: 80%;
-        margin: 0 auto;
+@media (max-width: 480px) {
+    .file-item {
+        width: 100%;
     }
 }
 
+.file-list {
+    margin-bottom: 15px;
+}
+
+#file-list-container {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    margin: 0;
+    text-align: center;
+}

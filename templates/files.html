@@ -10,11 +10,11 @@
     <div class="toolbar">
         <a href="{{ url_for('home') }}"><h1>HomeHelp</h1></a>
         <div class="toolbar-buttons">
-            <button><a href="{{ url_for('signin') }}">Sign in</a></button>
-            <button><a href="/logout" class="logout-button">Logout</a></button>
+            <a href="{{ url_for('signin') }}">Sign in</a>
+            <a href="/logout" class="logout-button">Logout</a>
         </div>
     </div>
-    <div class="container">
+    <div class="container" id="file-list-container">
         <h2>Uploaded Files</h2>
         <div class="file-list">
             <div class="file-item">
