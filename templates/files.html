@@ -17,31 +17,19 @@
     <div class="container" id="file-list-container">
         <h2>Uploaded Files</h2>
         <div class="file-list">
-            <div class="file-item">
-                <span>Sample Directory</span>
-                <a href="/files/sample_directory" class="button-link">Open Directory</a>
-            </div>
-            <div class="file-item">
-                <a href="/download/sample_file1.txt">sample_file1.txt</a>
-            </div>
-            <div class="file-item">
-                <a href="/download/sample_file2.pdf">sample_file2.pdf</a>
-            </div>
-            <div class="file-item">
-                <a href="/download/sample_file3.jpg">sample_file3.jpg</a>
-            </div>
+            {% for file in files %}
+                <div class="file-item">
+                    {% if file.isDir %}
+                        <span>📁 {{ file.name }}</span>
+                        <a href="/files/{{ file.name }}" class="button-link">Open Directory</a>
+                    {% else %}
+                        <a href="/download/{{ file.name }}">📄 {{ file.name }}</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
 
         <a href="{{ url_for('upload.upload') }}" class="upload-link">Upload a new file</a>
     </div>
-    <ul>
-        {% for file in files %}
-            {% if file.isDir %}
-                📁 <strong>{{ file.name }}</strong>
-            {% else %}
-                📄 {{ file.name }}
-            {% endif %}
-        {% endfor %}
-    </ul>
 </body>
 </html>
