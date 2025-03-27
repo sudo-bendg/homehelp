@@ -34,5 +34,14 @@
 
         <a href="{{ url_for('upload.upload') }}" class="upload-link">Upload a new file</a>
     </div>
+    <ul>
+        {% for file in files %}
+            {% if file.isDir %}
+                📁 <strong>{{ file.name }}</strong>
+            {% else %}
+                📄 {{ file.name }}
+            {% endif %}
+        {% endfor %}
+    </ul>
 </body>
 </html>

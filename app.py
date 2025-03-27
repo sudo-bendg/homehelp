@@ -2,6 +2,11 @@ from flask import Flask
 from routes.files import files_bp
 from routes.signin import signin_bp
 from routes.upload import upload_bp
+import os
+
+homehelpDirectory = os.getcwd()
+if not os.path.isdir(homehelpDirectory + "/homehelpFiles"):
+    os.mkdir(homehelpDirectory + "/homehelpFiles")
 
 app = Flask(__name__, template_folder='./templates')
 
