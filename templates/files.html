@@ -24,7 +24,7 @@
                         <a href="/files/{{ file.name }}" id="file-option">Open Directory</a>
                     {% else %}
                         <span id="file-name">📄 {{ file.name }}</span>
-                        <a href="/download/{{ file.name }}" id="file-option">Download</a>
+                        <a href="{{ url_for('files.download_file', filename=file.name) }}" id="file-option">Download</a>
                     {% endif %}
                 </div>
             {% endfor %}
