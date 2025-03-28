@@ -6,15 +6,20 @@ from flask import (
     request,
     redirect,
     url_for,
+    session,
 )
 import os
 from werkzeug.utils import secure_filename
 
+files_bp = Blueprint("files", __name__)
+
 workingDirectory = os.getcwd()
 currentRelPath = "/homehelpFiles"
 
-files_bp = Blueprint("files", __name__)
-
+@files_bp.before_request
+def require_login():
+    if "user" not in session:
+        return redirect(url_for("signin.signin"))
 
 @files_bp.route("/files/", defaults={"path": ""})
 @files_bp.route("/files/<path:path>")

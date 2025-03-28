@@ -1,3 +1,6 @@
 venv/
 routes/__pycache__/
 homehelpFiles/
+db_config.py
+__pycache__/
+flask_session/
