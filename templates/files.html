@@ -43,6 +43,15 @@
                 <button type="submit">Upload</button>
             </form>
         </div>
+
+        <div class="create-directory-section">
+            <h3>Create a New Directory</h3>
+            <form action="{{ url_for('files.create_directory') }}" method="POST">
+                <input type="hidden" name="path" value="{{ currentPath }}">
+                <input type="text" name="directory_name" placeholder="Enter directory name" required>
+                <button type="submit">Create</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

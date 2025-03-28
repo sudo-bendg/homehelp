@@ -117,3 +117,32 @@ def upload_directory(path):
     return redirect(
         url_for("files.home", path=path)
     )  # Redirect back to the current directory
+
+
+@files_bp.route('/files/create-directory', methods=['POST'])
+def create_directory():
+    # Get the path and directory name from the form
+    path = request.form.get('path', '').strip()
+    directory_name = request.form.get('directory_name', '').strip()
+
+    # Ensure the path and directory name are valid
+    if not directory_name:
+        return "Invalid path or directory name", 400
+
+    # Construct the full path to the current directory
+    fullPath = os.path.join(workingDirectory + currentRelPath, path)
+
+    # Ensure the path is valid and within the allowed directory
+    if not os.path.exists(fullPath) or not os.path.isdir(fullPath):
+        abort(404)  # Return a 404 error if the directory doesn't exist
+
+    # Construct the full path for the new directory
+    new_directory_path = os.path.join(fullPath, directory_name)
+
+    # Create the new directory
+    try:
+        os.makedirs(new_directory_path, exist_ok=False)  # Raise an error if the directory already exists
+    except FileExistsError:
+        return "Directory already exists", 400
+
+    return redirect(url_for('files.home', path=path))  # Redirect back to the current directory
