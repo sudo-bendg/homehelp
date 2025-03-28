@@ -13,7 +13,7 @@ def home():
     for file in currentDirectoryFiles:
         filePath = os.path.join(workingDirectory + currentRelPath + "/" + file)
         fileInfo.append({"name": file, "isDir": os.path.isdir(filePath)})
-    return render_template('files.html', files=fileInfo)
+    return render_template('files.html', files=sorted(fileInfo, key=lambda f: str(not f['isDir']) + f['name']))
 
 @files_bp.route('/download/<filename>')
 def download_file(filename):
