@@ -63,3 +63,37 @@ def upload_file(path):
     filename = secure_filename(file.filename)  # Sanitize the filename
     file.save(os.path.join(fullPath, filename))  # Save the file
     return redirect(url_for('files.home', path=path))  # Redirect back to the current directory
+
+@files_bp.route('/files/upload-directory/<path:path>', methods=['POST'])
+def upload_directory(path):
+    # Construct the full path to the current directory
+    fullPath = os.path.join(workingDirectory + currentRelPath, path)
+
+    # Ensure the path is valid and within the allowed directory
+    if not os.path.exists(fullPath) or not os.path.isdir(fullPath):
+        abort(404)  # Return a 404 error if the directory doesn't exist
+
+    # Check if files were uploaded
+    if 'files' not in request.files:
+        return "No files part", 400
+
+    files = request.files.getlist('files')  # Get the list of uploaded files
+
+    for file in files:
+        # Extract the relative path of the file from the client's directory structure
+        relative_path = file.filename
+        save_path = os.path.join(fullPath, relative_path)
+
+        # Ensure the directory structure exists
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+
+        # Save the file
+        file.save(save_path)
+
+    # Create the directory itself if it doesn't exist
+    for file in files:
+        relative_path = file.filename
+        directory_path = os.path.join(fullPath, os.path.dirname(relative_path))
+        os.makedirs(directory_path, exist_ok=True)
+
+    return redirect(url_for('files.home', path=path))  # Redirect back to the current directory
