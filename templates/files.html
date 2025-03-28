@@ -17,11 +17,17 @@
     <div class="container" id="file-list-container">
         <h2>Uploaded Files</h2>
         <div class="file-list">
+            {% if parentPath %}
+                <div class="file-item">
+                    <span id="file-name">📂 ..</span>
+                    <a href="{{ url_for('files.home', path=parentPath) }}" id="file-option">Go Back</a>
+                </div>
+            {% endif %}
             {% for file in files %}
                 <div class="file-item">
                     {% if file.isDir %}
                         <span id="file-name">📁 {{ file.name }}</span>
-                        <a href="/files/{{ file.name }}" id="file-option">Open Directory</a>
+                        <a href="{{ url_for('files.home', path=(currentPath + '/' + file.name).strip('/')) }}" id="file-option">Open Directory</a>
                     {% else %}
                         <span id="file-name">📄 {{ file.name }}</span>
                         <a href="{{ url_for('files.download_file', filename=file.name) }}" id="file-option">Download</a>
