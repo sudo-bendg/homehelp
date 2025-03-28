@@ -17,7 +17,7 @@
     <div class="container" id="file-list-container">
         <h2>Uploaded Files</h2>
         <div class="file-list">
-            {% if parentPath %}
+            {% if not parentPath == None %}
                 <div class="file-item">
                     <span id="file-name">📂 ..</span>
                     <a href="{{ url_for('files.home', path=parentPath) }}" id="file-option">Go Back</a>
