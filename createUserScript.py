@@ -9,8 +9,8 @@ conn = mysql.connector.connect(**db_config)
 cursor = conn.cursor()
 
 # Add a new user
-username = "testuser"
-password = "password123"
+username = input("User to add:")
+password = input("Password:")
 hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
 
 cursor.execute("INSERT INTO users (username, password_hash) VALUES (%s, %s)", (username, hashed_password))
