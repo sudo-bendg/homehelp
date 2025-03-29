@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from routes.files import files_bp
 from routes.signin import signin_bp
 import os
@@ -18,6 +18,11 @@ Session(app)
 # Register blueprints
 app.register_blueprint(files_bp)
 app.register_blueprint(signin_bp)
+
+# Default route to redirect to /files/
+@app.route("/")
+def index():
+    return redirect(url_for("files.home"))
 
 if __name__ == "__main__":
     app.run(debug=True)
